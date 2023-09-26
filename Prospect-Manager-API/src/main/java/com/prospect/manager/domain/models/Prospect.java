@@ -13,7 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Prospect extends BaseEntity {
 
     @NotNull
-    private Boolean isNaturalPerson;
+    private Boolean analyzed;
+
+    @NotNull
+    private Boolean naturalPerson;
 
     @DBRef
     private Person person;

@@ -13,7 +13,10 @@ public class ProspectDto {
     private String id;
 
     @NotNull
-    private Boolean isNaturalPerson;
+    private Boolean analyzed;
+
+    @NotNull
+    private Boolean naturalPerson;
 
     private PersonDto person;
 
