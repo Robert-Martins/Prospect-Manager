@@ -29,4 +29,7 @@ public class Company extends BaseEntity {
     @DBRef
     private Person contact;
 
+    @DBRef
+    private Prospect prospect;
+
 }

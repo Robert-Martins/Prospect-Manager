@@ -4,6 +4,7 @@ import com.prospect.manager.infrastructure.base.BaseEntity;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -25,5 +26,8 @@ public class Person extends BaseEntity {
 
     @Max(value = 9999, message = "MCC Field with value higher than 9999")
     private Integer mcc;
+
+    @DBRef
+    private Prospect prospect;
 
 }
