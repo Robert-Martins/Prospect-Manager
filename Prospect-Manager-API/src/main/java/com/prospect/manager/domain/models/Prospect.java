@@ -1,6 +1,7 @@
 package com.prospect.manager.domain.models;
 
 import com.prospect.manager.infrastructure.base.BaseEntity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "prospects")
 public class Prospect extends BaseEntity {
 
+    @NotNull
     private Boolean isNaturalPerson;
 
     @DBRef
