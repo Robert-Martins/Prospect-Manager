@@ -1,11 +1,14 @@
 package com.prospect.manager.domain.models;
 
 import com.prospect.manager.infrastructure.base.BaseEntity;
+import com.prospect.manager.infrastructure.enums.ProspectAnalysisStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,7 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Prospect extends BaseEntity {
 
     @NotNull
-    private Boolean analyzed;
+    private ProspectAnalysisStatus status;
+
+    private Date analyzedAt;
 
     @NotNull
     private Boolean naturalPerson;

@@ -1,5 +1,6 @@
 package com.prospect.manager.presentation.dtos;
 
+import com.prospect.manager.infrastructure.enums.ProspectAnalysisStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,9 @@ public class ProspectDto {
     private String id;
 
     @NotNull
-    private Boolean analyzed;
+    private ProspectAnalysisStatus status;
+
+    private Date analyzedAt;
 
     @NotNull
     private Boolean naturalPerson;
