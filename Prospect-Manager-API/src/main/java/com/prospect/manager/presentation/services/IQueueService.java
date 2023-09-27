@@ -9,6 +9,8 @@ public interface IQueueService {
 
     QueueDto getQueue();
 
+    void onItemUpdate(ObjectId prospectId);
+
     QueueDto removeFirst();
 
 }
