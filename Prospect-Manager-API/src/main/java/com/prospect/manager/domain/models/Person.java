@@ -27,7 +27,4 @@ public class Person extends BaseEntity {
     @Max(value = 9999, message = "MCC Field with value higher than 9999")
     private Integer mcc;
 
-    @DBRef
-    private Prospect prospect;
-
 }

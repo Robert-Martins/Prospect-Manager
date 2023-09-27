@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonRepository extends MongoRepository<Person, ObjectId> {
+
+    Boolean existsByCpf(String cpf);
+
 }

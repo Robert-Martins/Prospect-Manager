@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyRepository extends MongoRepository<Company, ObjectId> {
+
+    Boolean existsByCnpj(String cnpj);
+
 }
