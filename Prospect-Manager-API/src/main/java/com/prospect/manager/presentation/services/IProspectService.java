@@ -4,7 +4,7 @@ import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import org.bson.types.ObjectId;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public interface IProspectService {
 
@@ -12,7 +12,7 @@ public interface IProspectService {
 
     ProspectDto read(ObjectId id);
 
-    LinkedList<ProspectDto> readAll(ProspectFilter prospectFilter);
+    List<ProspectDto> readAll(ProspectFilter prospectFilter);
 
     void update(ProspectDto prospectDto);
 

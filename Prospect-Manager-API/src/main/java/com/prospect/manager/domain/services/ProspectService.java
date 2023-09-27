@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class ProspectService implements IProspectService {
@@ -24,7 +24,7 @@ public class ProspectService implements IProspectService {
 
     }
 
-    public LinkedList<ProspectDto> readAll(ProspectFilter prospectFilter) {
+    public List<ProspectDto> readAll(ProspectFilter prospectFilter) {
 
     }
 

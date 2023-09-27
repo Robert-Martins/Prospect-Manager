@@ -3,7 +3,6 @@ package com.prospect.manager.domain.models;
 import com.prospect.manager.infrastructure.base.BaseEntity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;

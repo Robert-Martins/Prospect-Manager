@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
+import java.util.List;
 
 @RestController
 @RequestMapping(name = "/prospects")
@@ -32,7 +32,7 @@ public class ProspectController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public LinkedList<ProspectDto> readAll(@RequestParam ProspectFilter prospectFilter) {
+    public List<ProspectDto> readAll(@RequestParam ProspectFilter prospectFilter) {
         return this.prospectService.readAll(prospectFilter);
     }
 
