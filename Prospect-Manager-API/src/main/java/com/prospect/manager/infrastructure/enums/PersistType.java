@@ -3,7 +3,8 @@ package com.prospect.manager.infrastructure.enums;
 public enum PersistType {
 
     CREATE("New Register"),
-    UPDATE("Register Update");
+    UPDATE("Register Update"),
+    DELETE("Register deletion");
 
     private final String description;
 

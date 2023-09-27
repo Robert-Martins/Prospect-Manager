@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProspectUpdateEventListener implements ApplicationListener<ProspectPersistEvent> {
+public class ProspectPersistEventListener implements ApplicationListener<ProspectPersistEvent> {
 
     @Autowired
     private IQueueService queueService;
@@ -17,6 +17,7 @@ public class ProspectUpdateEventListener implements ApplicationListener<Prospect
         switch (event.getType()) {
             case CREATE -> this.queueService.insertLast(event.getProspectId());
             case UPDATE -> this.queueService.onItemUpdate(event.getProspectId());
+            case DELETE -> this.queueService.onItemDelete(event.getProspectId());
         }
     }
 
