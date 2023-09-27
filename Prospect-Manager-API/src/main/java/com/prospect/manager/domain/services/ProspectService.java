@@ -16,30 +16,37 @@ public class ProspectService implements IProspectService {
     @Autowired
     private ProspectRepository prospectRepository;
 
+    @Override
     public void create(ProspectDto prospectDto) {
-
+        
     }
 
+    @Override
     public ProspectDto read(ObjectId id) {
 
     }
 
+    @Override
     public List<ProspectDto> readAll(ProspectFilter prospectFilter) {
 
     }
 
+    @Override
     public void update(ProspectDto prospectDto) {
 
     }
 
+    @Override
     public void delete(ObjectId id) {
 
     }
 
+    @Override
     public String existsByTaxId(String taxId) {
 
     }
 
+    @Override
     public void analyze(ObjectId id) {
 
     }
