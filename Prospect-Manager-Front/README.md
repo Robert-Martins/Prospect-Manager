@@ -1,6 +1,38 @@
-# ProspectManager
+# Prospect Manager Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+Front-End do Sistema de Gerenciamento de Prospects
+
+## Sobre esta Aplicação
+
+A implementação estará orientada pelos Requisitos Funcionais e Não-Funcionais do Sistema.
+
+## Sobre o Framework
+
+Documentação do Framework
+
+## Sobre o Desenvolvimento
+
+O desenvolvimento da aplicação utiliza a linguagem de marcação HTML, SCSS para estilização e TypeScript para implementação da lógica de componentes.
+
+A aplicação utiliza roteamento e o Angular HTTP para comunicação com o Back-End.
+
+## Bibliotecas Externas
+
+Seguem as bibliotecas utilizadas no desenvolvimento deste projeto junto a suas documentações:
+
+
+
+### Como executar a Aplicação
+
+Para executar a aplicação, é necessário possuir o NodeJS instalado em sua máquina, versão mínima 16.17.0 e a versão do @angular/cli mínima de 16.23.0.
+
+Para executar, basta inserir e executar o seguinte comando em um terminal disposto na raiz deste Projeto:
+
+npm run start
+
+## Orientações do Framework
+
+Segue orientações de comandos do Framework geradas ao iniciar um novo projeto Angular:
 
 ## Development server
 
