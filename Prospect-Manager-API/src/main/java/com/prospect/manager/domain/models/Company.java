@@ -18,9 +18,9 @@ public class Company extends BaseEntity {
     @Size(min = 14, max = 14, message = "CNPJ Field with more or less than 14 characters")
     private String cnpj;
 
-    @NotNull(message = "Name Field is Null")
-    @Size(max = 50, message = "Name Field with more than 50 characters")
-    private String name;
+    @NotNull(message = "Company Name Field is Null")
+    @Size(max = 50, message = "Company Name Field with more than 50 characters")
+    private String companyName;
 
     @Max(value = 9999, message = "MCC Field with value higher than 9999")
     private Integer mcc;

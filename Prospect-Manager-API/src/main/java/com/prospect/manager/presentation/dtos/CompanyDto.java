@@ -15,7 +15,7 @@ public class CompanyDto {
 
     private String cnpj;
 
-    private String name;
+    private String companyName;
 
     private Integer mcc;
 
