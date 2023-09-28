@@ -1,5 +1,7 @@
 package com.prospect.manager.presentation.services;
 
+import com.prospect.manager.domain.models.Prospect;
+import com.prospect.manager.infrastructure.enums.ProspectAnalysisStatus;
 import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import org.bson.types.ObjectId;
@@ -10,6 +12,8 @@ public interface IProspectService {
 
     void create(ProspectDto prospectDto);
 
+    Prospect findById(ObjectId id);
+
     ProspectDto read(ObjectId id);
 
     List<ProspectDto> readAll(ProspectFilter prospectFilter);
@@ -18,8 +22,6 @@ public interface IProspectService {
 
     void delete(ObjectId id);
 
-    String existsByTaxId(String taxId);
-
-    void analyze(ObjectId id);
+    void analyze(ObjectId id, ProspectAnalysisStatus status);
 
 }

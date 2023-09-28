@@ -1,5 +1,6 @@
 package com.prospect.manager.presentation.controllers;
 
+import com.prospect.manager.infrastructure.enums.ProspectAnalysisStatus;
 import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import com.prospect.manager.presentation.services.IProspectService;
@@ -48,16 +49,10 @@ public class ProspectController {
         this.prospectService.delete(id);
     }
 
-    @GetMapping("/exists/{taxId}")
+    @PostMapping("/{id}/{status}")
     @ResponseStatus(HttpStatus.OK)
-    public String existsByTaxId(@PathVariable(name = "taxId") String taxId) {
-        return this.prospectService.existsByTaxId(taxId);
-    }
-
-    @PostMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void analyze(@PathVariable(name = "id") ObjectId id) {
-        this.prospectService.analyze(id);
+    public void analyze(@PathVariable(name = "id") ObjectId id, @PathVariable(name = "status") ProspectAnalysisStatus status) {
+        this.prospectService.analyze(id, status);
     }
 
 }
