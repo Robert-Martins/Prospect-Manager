@@ -6,6 +6,7 @@ import com.prospect.manager.infrastructure.exception.exceptions.DuplicateKeyExce
 import com.prospect.manager.infrastructure.exception.exceptions.NotFoundException;
 import com.prospect.manager.presentation.dtos.CompanyDto;
 import com.prospect.manager.presentation.services.ICompanyService;
+import com.prospect.manager.presentation.services.IPersonService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CompanyService implements ICompanyService {
     private CompanyRepository companyRepository;
 
     @Autowired
-    private PersonService personService;
+    private IPersonService personService;
 
     @Override
     public Company create(CompanyDto companyDto) {
@@ -48,7 +49,7 @@ public class CompanyService implements ICompanyService {
     public Company update(CompanyDto companyDto) {
         Company company = this.companyRepository.findById(new ObjectId(companyDto.getId()))
                 .orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
-        if(this.companyRepository.existsByCnpj(companyDto.getCnpj()))
+        if(!company.getCnpj().equalsIgnoreCase(companyDto.getCnpj()) && this.companyRepository.existsByCnpj(companyDto.getCnpj()))
             throw new DuplicateKeyException("Empresa com este CPNJ já existe");
         Optional.ofNullable(companyDto.getPersonDto())
                 .ifPresent(
@@ -56,6 +57,7 @@ public class CompanyService implements ICompanyService {
                 );
         BeanUtils.copyProperties(companyDto, company,
                 "id",
+                "contact",
                 "createdAt",
                 "updatedAt");
         return this.companyRepository.save(company);
@@ -63,8 +65,10 @@ public class CompanyService implements ICompanyService {
 
     @Override
     public void deleteById(ObjectId id) {
-        if(!this.companyRepository.existsById(id))
-            throw new NotFoundException("Empresa não encontrada");
+        Company company = this.companyRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
+        Optional.ofNullable(company.getContact())
+                .ifPresent(person -> this.personService.deleteById(person.getId()));
         this.companyRepository.deleteById(id);
     }
 
