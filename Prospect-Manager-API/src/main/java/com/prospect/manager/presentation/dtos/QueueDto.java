@@ -3,6 +3,7 @@ package com.prospect.manager.presentation.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,6 @@ public class QueueDto {
 
     private ProspectDto first;
 
-    private List<QueueItemDto> queueItems;
+    private List<QueueItemDto> queueItems = new ArrayList<>();
 
 }
