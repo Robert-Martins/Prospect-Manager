@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'prospect-manager';
+  
+  public isSidebarOpen: boolean = true;
+
+  public changeSidebarState(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
 }
