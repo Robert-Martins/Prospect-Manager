@@ -4,7 +4,6 @@ import com.prospect.manager.infrastructure.base.BaseEntity;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -21,10 +20,10 @@ public class Person extends BaseEntity {
     private String name;
 
     @NotNull(message = "Email Field is Null")
-    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$\n")
     private String email;
 
-    @Max(value = 9999, message = "MCC Field with value higher than 9999")
+    @Max(value = 9999, message = "MCC Field with a value or negative or higher than 9999")
     private Integer mcc;
 
 }

@@ -12,7 +12,6 @@ import com.prospect.manager.presentation.dtos.ProspectDto;
 import com.prospect.manager.presentation.services.ICompanyService;
 import com.prospect.manager.presentation.services.IPersonService;
 import com.prospect.manager.presentation.services.IProspectService;
-import com.prospect.manager.presentation.services.IQueueService;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +39,6 @@ public class ProspectService implements IProspectService {
 
     @Autowired
     private ICompanyService companyService;
-
-    @Autowired
-    private IQueueService queueService;
 
     @Autowired
     private ApplicationEventPublisher publisher;
@@ -129,7 +125,12 @@ public class ProspectService implements IProspectService {
     }
 
     @Override
-    public void delete(ObjectId id) {
+    public void delete(Prospect prospect) {
+        this.prospectRepository.delete(prospect);
+    }
+
+    @Override
+    public void deleteById(ObjectId id) {
         Prospect prospect = this.prospectRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Prospect não encontrado"));
         if(prospect.getNaturalPerson())
@@ -137,8 +138,15 @@ public class ProspectService implements IProspectService {
         else
             this.companyService.deleteById(prospect.getCompany().getId());
         if(prospect.getStatus().equals(ProspectAnalysisStatus.AWAITING_ANALYSIS))
-            this.queueService.onItemDelete(id);
-        this.prospectRepository.deleteById(id);
+            this.publisher.publishEvent(
+                    new ProspectPersistEvent(
+                            this,
+                            PersistType.DELETE,
+                            id
+                    )
+            );
+        else
+            this.prospectRepository.deleteById(id);
     }
 
     @Override

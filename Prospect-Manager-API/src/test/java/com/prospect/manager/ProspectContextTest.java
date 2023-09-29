@@ -171,7 +171,7 @@ public class ProspectContextTest {
         prospectDto.setNaturalPerson(true);
 
         PersonDto personDto = new PersonDto();
-        personDto.setName("Robert NomeExtremamenteExtensoQueUltrapasseOLimiteMartins");
+        personDto.setName("Maximiliano Frederico da Silva Santos Junior");
         personDto.setCpf("00011122233");
         personDto.setEmail("robert@gmail.com");
         personDto.setMcc(1000);
@@ -203,7 +203,7 @@ public class ProspectContextTest {
         PersonDto personDto = new PersonDto();
         personDto.setName("Robert Martins");
         personDto.setCpf("00011122233");
-        personDto.setEmail("robert@emailextremamenteextenso.emailextremamenteextenso");
+        personDto.setEmail("robert@gmail");
         personDto.setMcc(9998);
 
         prospectDto.setPerson(personDto);
@@ -231,7 +231,7 @@ public class ProspectContextTest {
         prospectDto.setNaturalPerson(false);
 
         CompanyDto companyDto = new CompanyDto();
-        companyDto.setCompanyName("Robert EmpresaComNomeExtremamenteExtenso PJ");
+        companyDto.setCompanyName("Construções e Engenharia de Desenvolvimento Sustentável Ltda");
         companyDto.setCnpj("32123212321299");
         companyDto.setMcc(9999);
 

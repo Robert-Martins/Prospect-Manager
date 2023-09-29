@@ -15,7 +15,6 @@ import java.util.Date;
 @Document(collection = "prospects")
 public class Prospect extends BaseEntity {
 
-    @NotNull
     private ProspectAnalysisStatus status;
 
     private Date analyzedAt;

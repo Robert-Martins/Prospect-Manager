@@ -20,7 +20,9 @@ public interface IProspectService {
 
     void update(ProspectDto prospectDto);
 
-    void delete(ObjectId id);
+    void delete(Prospect prospect);
+
+    void deleteById(ObjectId id);
 
     void analyze(ObjectId id, ProspectAnalysisStatus status);
 

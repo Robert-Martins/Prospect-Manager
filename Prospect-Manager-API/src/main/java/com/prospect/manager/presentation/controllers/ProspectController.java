@@ -46,7 +46,7 @@ public class ProspectController {
     @DeleteMapping(name = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable(name = "id") ObjectId id) {
-        this.prospectService.delete(id);
+        this.prospectService.deleteById(id);
     }
 
     @PostMapping("/{id}/{status}")

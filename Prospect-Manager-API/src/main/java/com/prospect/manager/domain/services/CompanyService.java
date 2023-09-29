@@ -28,7 +28,7 @@ public class CompanyService implements ICompanyService {
         if(this.companyRepository.existsByCnpj(companyDto.getCnpj()))
             throw new DuplicateKeyException("Empresa com este CPNJ já existe");
         Company company = new Company();
-        Optional.ofNullable(companyDto.getPersonDto())
+        Optional.ofNullable(companyDto.getContact())
                         .ifPresent(
                                 personDto -> company.setContact(this.personService.create(personDto))
                         );
@@ -51,7 +51,7 @@ public class CompanyService implements ICompanyService {
                 .orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
         if(!company.getCnpj().equalsIgnoreCase(companyDto.getCnpj()) && this.companyRepository.existsByCnpj(companyDto.getCnpj()))
             throw new DuplicateKeyException("Empresa com este CPNJ já existe");
-        Optional.ofNullable(companyDto.getPersonDto())
+        Optional.ofNullable(companyDto.getContact())
                 .ifPresent(
                         personDto -> company.setContact(this.personService.update(personDto))
                 );

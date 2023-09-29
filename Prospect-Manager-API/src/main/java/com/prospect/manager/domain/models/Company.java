@@ -22,7 +22,7 @@ public class Company extends BaseEntity {
     @Size(max = 50, message = "Company Name Field with more than 50 characters")
     private String companyName;
 
-    @Max(value = 9999, message = "MCC Field with value higher than 9999")
+    @Max(value = 9999, message = "MCC Field with a value or negative or higher than 9999")
     private Integer mcc;
 
     @DBRef
