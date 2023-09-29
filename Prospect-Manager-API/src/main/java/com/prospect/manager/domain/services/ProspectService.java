@@ -1,6 +1,5 @@
 package com.prospect.manager.domain.services;
 
-import com.prospect.manager.domain.models.Person;
 import com.prospect.manager.domain.models.Prospect;
 import com.prospect.manager.domain.repositories.ProspectRepository;
 import com.prospect.manager.infrastructure.enums.PersistType;
@@ -9,20 +8,21 @@ import com.prospect.manager.infrastructure.events.ProspectPersistEvent;
 import com.prospect.manager.infrastructure.exception.exceptions.NotFoundException;
 import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.infrastructure.utils.AppModelMapper;
-import com.prospect.manager.presentation.dtos.CompanyDto;
-import com.prospect.manager.presentation.dtos.PersonDto;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import com.prospect.manager.presentation.services.ICompanyService;
 import com.prospect.manager.presentation.services.IPersonService;
 import com.prospect.manager.presentation.services.IProspectService;
 import com.prospect.manager.presentation.services.IQueueService;
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +31,9 @@ public class ProspectService implements IProspectService {
 
     @Autowired
     private ProspectRepository prospectRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Autowired
     private IPersonService personService;
@@ -78,7 +81,34 @@ public class ProspectService implements IProspectService {
 
     @Override
     public List<ProspectDto> readAll(ProspectFilter prospectFilter) {
-        return new ArrayList<>();
+        Query query = new Query();
+
+        if (StringUtils.isNotEmpty(prospectFilter.getName())) {
+            Criteria nameCriteria = Criteria.where("person.name").regex(prospectFilter.getName(), "i")
+                    .orOperator(Criteria.where("company.companyName").regex(prospectFilter.getName(), "i"));
+            query.addCriteria(nameCriteria);
+        }
+
+        if (StringUtils.isNotEmpty(prospectFilter.getTaxId())) {
+            Criteria taxIdCriteria = Criteria.where("person.cpf").is(prospectFilter.getTaxId())
+                    .orOperator(Criteria.where("company.cnpj").is(prospectFilter.getTaxId()));
+            query.addCriteria(taxIdCriteria);
+        }
+
+        if (prospectFilter.getInitialDate() != null || prospectFilter.getFinalDate() != null) {
+            Criteria dateCriteria = new Criteria();
+            if (prospectFilter.getInitialDate() != null) {
+                dateCriteria = dateCriteria.and("createdAt").gte(prospectFilter.getInitialDate());
+            }
+            if (prospectFilter.getFinalDate() != null) {
+                dateCriteria = dateCriteria.and("createdAt").lte(prospectFilter.getFinalDate());
+            }
+            query.addCriteria(dateCriteria);
+        }
+
+        query.with(Sort.by(Sort.Direction.DESC, "createdAt"));
+
+        return mongoTemplate.find(query, ProspectDto.class);
     }
 
     @Override
