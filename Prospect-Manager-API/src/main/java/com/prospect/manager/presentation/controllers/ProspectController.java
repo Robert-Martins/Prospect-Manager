@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/prospects")
+@RequestMapping("/prospects")
 public class ProspectController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class ProspectController {
         return this.prospectService.read(id);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<ProspectDto> readAll(@RequestParam ProspectFilter prospectFilter) {
         return this.prospectService.readAll(prospectFilter);
