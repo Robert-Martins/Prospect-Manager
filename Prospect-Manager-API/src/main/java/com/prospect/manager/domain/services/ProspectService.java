@@ -106,9 +106,9 @@ public class ProspectService implements IProspectService {
             this.personService.deleteById(prospect.getPerson().getId());
         else
             this.companyService.deleteById(prospect.getCompany().getId());
-        this.prospectRepository.deleteById(id);
         if(prospect.getStatus().equals(ProspectAnalysisStatus.AWAITING_ANALYSIS))
             this.queueService.onItemDelete(id);
+        this.prospectRepository.deleteById(id);
     }
 
     @Override

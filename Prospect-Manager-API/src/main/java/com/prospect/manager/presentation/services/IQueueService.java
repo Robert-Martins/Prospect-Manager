@@ -11,6 +11,8 @@ public interface IQueueService {
 
     void onItemUpdate(ObjectId prospectId);
 
+    void onItemDelete(ObjectId prospectId);
+
     QueueDto removeFirst();
 
 }

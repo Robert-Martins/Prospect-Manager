@@ -19,6 +19,6 @@ public class CompanyDto {
 
     private Integer mcc;
 
-    private PersonDto personDto;
+    private PersonDto contact;
 
 }
