@@ -18,6 +18,4 @@ public interface QueueItemRepository extends MongoRepository<QueueItem, ObjectId
 
     Optional<QueueItem> findByNext(ObjectId next);
 
-    Optional<QueueItem> findOldestByUpdatedAt();
-
 }

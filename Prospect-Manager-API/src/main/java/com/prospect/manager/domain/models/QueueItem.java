@@ -21,6 +21,10 @@ public class QueueItem extends BaseEntity {
         this.prospect = prospect;
     }
 
+    public void clearNext() {
+        this.next = null;
+    }
+
     public Boolean hasNext() {
         return this.getNext() != null;
     }

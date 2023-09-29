@@ -10,6 +10,9 @@ import com.prospect.manager.presentation.services.IProspectService;
 import com.prospect.manager.presentation.services.IQueueService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +28,9 @@ public class QueueService implements IQueueService {
     @Autowired
     private IProspectService prospectService;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @Override
     public void insertLast(ObjectId prospectId) {
         Prospect prospect = this.prospectService.findById(prospectId);
@@ -36,7 +42,7 @@ public class QueueService implements IQueueService {
     @Override
     public QueueDto getQueue() {
         List<QueueItem> queueItems = new ArrayList<>();
-        this.queueItemRepository.findOldestByUpdatedAt()
+        this.findFirst()
                 .ifPresent(
                         queueItem -> {
                             queueItems.add(queueItem);
@@ -63,22 +69,42 @@ public class QueueService implements IQueueService {
 
     @Override
     public QueueDto removeFirst() {
-        QueueItem queueItem = this.queueItemRepository.findOldestByUpdatedAt()
+        QueueItem queueItem = this.findFirst()
                 .orElseThrow(() -> new NotFoundException("Fila está vazia"));
         this.queueItemRepository.delete(queueItem);
         return this.getQueue();
     }
 
-    private void handleUpdate(QueueItem queueItem) {
+    private Optional<QueueItem> findFirst() {
+        Query query = new Query()
+                .with(Sort.by(Sort.Order.asc("updatedAt")))
+                .limit(1);
 
+        return Optional.ofNullable(mongoTemplate.findOne(query, QueueItem.class));
+    }
+
+    private void handleUpdate(QueueItem queueItem) {
+        this.handleChange(queueItem);
+        this.linkWithLast(queueItem);
     }
 
     private void handleDelete(QueueItem queueItem) {
-
+        this.handleChange(queueItem);
+        this.queueItemRepository.delete(queueItem);
     }
 
     private void handleChange(QueueItem queueItem) {
-
+        Optional<QueueItem> next = this.getNext(queueItem);
+        Optional<QueueItem> previous = this.getPrevious(queueItem);
+        if(next.isPresent() && previous.isPresent())
+            this.linkItems(next.get(), previous.get());
+        else if(next.isPresent())
+            this.linkWithLast(next.get());
+        else if(previous.isPresent()) {
+            QueueItem previousItem = previous.get();
+            previousItem.clearNext();
+            this.queueItemRepository.save(previousItem);
+        }
     }
 
     private void buildQueue(List<QueueItem> queue, ObjectId currentQueueItemId) {
