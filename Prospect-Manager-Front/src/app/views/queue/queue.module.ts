@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QueueViewComponent } from './queue-view/queue-view.component';
+import { QueueRoutingModule } from './queue-routing.module';
 
 
 
@@ -9,10 +10,8 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
     QueueViewComponent
   ],
   imports: [
-    CommonModule
-  ],
-  exports: [
-    QueueViewComponent
+    CommonModule,
+    QueueRoutingModule
   ]
 })
 export class QueueModule { }
