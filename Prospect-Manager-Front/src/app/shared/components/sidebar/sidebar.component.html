@@ -1,6 +1,6 @@
 <div>
     <h5>MENU</h5>
-    <a routerLink="/home" routerLinkActive="selected">Home</a>
-    <a routerLink="/prospects" routerLinkActive="selected">Prospects</a>
-    <a routerLink="/queue" routerLinkActive="selected">Queue</a>
+    <a routerLink="/home" routerLinkActive="selected" (click)="changeSidebarState.emit()">Home</a>
+    <a routerLink="/prospects" routerLinkActive="selected" (click)="changeSidebarState.emit()">Prospects</a>
+    <a routerLink="/queue" routerLinkActive="selected" (click)="changeSidebarState.emit()">Queue</a>
 </div>
