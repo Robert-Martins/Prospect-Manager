@@ -1,1 +1,31 @@
-<p>prospects-list works!</p>
+<section class="app-container">
+    <div>
+        <h5>Prospects</h5>
+        <button type="button" appButton="primary" (click)="newProspect()">Adicionar</button>
+    </div>
+    <prospect-filter-form 
+        [formGroup]="filterForm" 
+        [status]="prospectAnalysisStatus"
+        (onApply)="onApplyFilter()" 
+        (onClear)="onClearFilter()"
+    ></prospect-filter-form>
+    <table mat-table [dataSource]="prospects">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.name | namecase}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="taxId">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{(element.naturalPerson ? element.taxId : element.cnpj) | taxId}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="mcc">
+          <th mat-header-cell *matHeaderCellDef> MCC </th>
+          <td mat-cell *matCellDef="let element"> {{element.mcc}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    </table>
+      
+</section>

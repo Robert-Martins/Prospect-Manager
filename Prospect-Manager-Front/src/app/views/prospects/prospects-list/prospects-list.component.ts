@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EnumDto } from 'src/app/core/models/enum.model';
 import { Prospect } from 'src/app/core/models/prospect.model';
 import { AppService } from 'src/app/core/services/app.service';
+import AppDataSource from 'src/app/shared/directives/models/data/data-source.model';
 
 @Component({
   selector: 'app-prospects-list',
@@ -15,11 +16,15 @@ import { AppService } from 'src/app/core/services/app.service';
 })
 export class ProspectsListComponent implements OnInit {
 
+  public readonly displayedColumns: string[] = ['name', 'taxId', 'mcc'];
+
   public prospects: Prospect[] = [];
 
   public prospectAnalysisStatus: EnumDto[] = [];
 
   public filterForm: FormGroup;
+
+  public dataSource: AppDataSource<Prospect> = new AppDataSource([]);
 
   constructor(
     private toastr: ToastrService,
@@ -47,6 +52,15 @@ export class ProspectsListComponent implements OnInit {
     this.router.navigate([`/prospects/form/${id}`]);
   }
 
+  public onApplyFilter(): void {
+    this.loadProspects();
+  }
+
+  public onClearFilter(): void {
+    this.filterForm.reset();
+    this.loadProspects();
+  }
+
   private loadItems(): void {
     this.loadProspects();
     this.loadProspectsAnalysisStatus();
@@ -66,6 +80,7 @@ export class ProspectsListComponent implements OnInit {
       {
         next: prospects => {
           this.prospects = prospects;
+          this.dataSource.setData(prospects);
           this.spinner.hide();
         },
         error: error => {
