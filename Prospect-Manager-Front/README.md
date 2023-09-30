@@ -2,25 +2,25 @@
 
 Front-End do Sistema de Gerenciamento de Prospects
 
-## Sobre esta Aplicação
+### Sobre esta Aplicação
 
 A implementação estará orientada pelos Requisitos Funcionais e Não-Funcionais do Sistema.
 
-## Sobre o Framework
+<br>
 
-Documentação do Framework
+### Sobre o Framework
 
-## Sobre o Desenvolvimento
+Documentação do Framework: https://angular.io
+
+<br>
+
+### Sobre o Desenvolvimento
 
 O desenvolvimento da aplicação utiliza a linguagem de marcação HTML, SCSS para estilização e TypeScript para implementação da lógica de componentes.
 
 A aplicação utiliza roteamento e o Angular HTTP para comunicação com o Back-End.
 
-## Bibliotecas Externas
-
-Seguem as bibliotecas utilizadas no desenvolvimento deste projeto junto a suas documentações:
-
-
+<br>
 
 ### Como executar a Aplicação
 
@@ -30,10 +30,13 @@ Para executar, basta inserir e executar o seguinte comando em um terminal dispos
 
 npm run start
 
+<br>
+
 ## Orientações do Framework
 
 Segue orientações de comandos do Framework geradas ao iniciar um novo projeto Angular:
 
+<details><summary>Mais...</summary>
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -57,3 +60,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+</details>
