@@ -1,5 +1,10 @@
 package com.prospect.manager.presentation.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class EnumDto {
 
     private final String name;

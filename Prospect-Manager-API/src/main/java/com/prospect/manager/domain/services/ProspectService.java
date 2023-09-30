@@ -6,7 +6,6 @@ import com.prospect.manager.infrastructure.enums.PersistType;
 import com.prospect.manager.infrastructure.enums.ProspectAnalysisStatus;
 import com.prospect.manager.infrastructure.events.ProspectPersistEvent;
 import com.prospect.manager.infrastructure.exception.exceptions.NotFoundException;
-import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.infrastructure.utils.AppModelMapper;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import com.prospect.manager.presentation.services.ICompanyService;
@@ -76,28 +75,35 @@ public class ProspectService implements IProspectService {
     }
 
     @Override
-    public List<ProspectDto> readAll(ProspectFilter prospectFilter) {
+    public List<ProspectDto> readAll(
+            String name,
+            String taxId,
+            Integer mcc,
+            ProspectAnalysisStatus status,
+            Boolean naturalPerson,
+            Date initialDate,
+            Date finalDate) {
         Query query = new Query();
 
-        if (StringUtils.isNotEmpty(prospectFilter.getName())) {
-            Criteria nameCriteria = Criteria.where("person.name").regex(prospectFilter.getName(), "i")
-                    .orOperator(Criteria.where("company.companyName").regex(prospectFilter.getName(), "i"));
+        if (StringUtils.isNotEmpty(name)) {
+            Criteria nameCriteria = Criteria.where("person.name").regex(name, "i")
+                    .orOperator(Criteria.where("company.companyName").regex(name, "i"));
             query.addCriteria(nameCriteria);
         }
 
-        if (StringUtils.isNotEmpty(prospectFilter.getTaxId())) {
-            Criteria taxIdCriteria = Criteria.where("person.cpf").is(prospectFilter.getTaxId())
-                    .orOperator(Criteria.where("company.cnpj").is(prospectFilter.getTaxId()));
+        if (StringUtils.isNotEmpty(taxId)) {
+            Criteria taxIdCriteria = Criteria.where("person.cpf").is(taxId)
+                    .orOperator(Criteria.where("company.cnpj").is(taxId));
             query.addCriteria(taxIdCriteria);
         }
 
-        if (prospectFilter.getInitialDate() != null || prospectFilter.getFinalDate() != null) {
+        if (initialDate != null || finalDate != null) {
             Criteria dateCriteria = new Criteria();
-            if (prospectFilter.getInitialDate() != null) {
-                dateCriteria = dateCriteria.and("createdAt").gte(prospectFilter.getInitialDate());
+            if (initialDate != null) {
+                dateCriteria = dateCriteria.and("createdAt").gte(initialDate);
             }
-            if (prospectFilter.getFinalDate() != null) {
-                dateCriteria = dateCriteria.and("createdAt").lte(prospectFilter.getFinalDate());
+            if (finalDate != null) {
+                dateCriteria = dateCriteria.and("createdAt").lte(finalDate);
             }
             query.addCriteria(dateCriteria);
         }

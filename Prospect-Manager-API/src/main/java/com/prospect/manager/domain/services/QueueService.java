@@ -123,7 +123,10 @@ public class QueueService implements IQueueService {
     private void linkWithLast(QueueItem queueItem) {
         this.queueItemRepository.findFirstByNextIsNull()
                 .ifPresent(
-                        last -> this.linkItems(queueItem, last)
+                        last -> {
+                            if(queueItem.getId().equals(last.getId()))
+                                this.linkItems(queueItem, last);
+                        }
                 );
     }
 

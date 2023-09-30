@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,8 +34,24 @@ public class ProspectController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<ProspectDto> readAll(@RequestParam ProspectFilter prospectFilter) {
-        return this.prospectService.readAll(prospectFilter);
+    public List<ProspectDto> readAll(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "taxId", required = false) String taxId,
+            @RequestParam(name = "mcc", required = false) Integer mcc,
+            @RequestParam(name = "status", required = false) ProspectAnalysisStatus status,
+            @RequestParam(name = "naturalPerson", required = false) Boolean naturalPerson,
+            @RequestParam(name = "initialDate", required = false) Date initialDate,
+            @RequestParam(name = "finalDate", required = false) Date finalDate
+    ) {
+        return this.prospectService.readAll(
+                name,
+                taxId,
+                mcc,
+                status,
+                naturalPerson,
+                initialDate,
+                finalDate
+        );
     }
 
     @PutMapping

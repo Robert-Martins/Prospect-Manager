@@ -13,7 +13,6 @@ public class ProspectDto {
 
     private String id;
 
-    @NotNull
     private ProspectAnalysisStatus status;
 
     private Date analyzedAt;

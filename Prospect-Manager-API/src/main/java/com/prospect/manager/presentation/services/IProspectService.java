@@ -6,6 +6,7 @@ import com.prospect.manager.infrastructure.filters.ProspectFilter;
 import com.prospect.manager.presentation.dtos.ProspectDto;
 import org.bson.types.ObjectId;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IProspectService {
@@ -16,7 +17,15 @@ public interface IProspectService {
 
     ProspectDto read(ObjectId id);
 
-    List<ProspectDto> readAll(ProspectFilter prospectFilter);
+    List<ProspectDto> readAll(
+            String name,
+            String taxId,
+            Integer mcc,
+            ProspectAnalysisStatus status,
+            Boolean naturalPerson,
+            Date initialDate,
+            Date finalDate
+    );
 
     void update(ProspectDto prospectDto);
 

@@ -20,7 +20,7 @@ public class Person extends BaseEntity {
     private String name;
 
     @NotNull(message = "Email Field is Null")
-    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$\n")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
     private String email;
 
     @Max(value = 9999, message = "MCC Field with a value or negative or higher than 9999")
