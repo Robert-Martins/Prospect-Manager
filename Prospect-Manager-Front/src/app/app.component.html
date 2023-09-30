@@ -1,0 +1,11 @@
+<app-header (changeSidebarState)="changeSidebarState()"></app-header>
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="isSidebarOpen" >
+        <app-sidebar (changeSidebarState)="changeSidebarState()"></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer></app-footer>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

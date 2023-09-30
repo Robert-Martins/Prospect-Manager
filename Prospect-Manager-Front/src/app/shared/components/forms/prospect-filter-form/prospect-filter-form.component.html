@@ -1,0 +1,45 @@
+<form class="grid" *ngIf="formGroup" [formGroup]="formGroup">
+    <mat-form-field>
+        <input matInput formControlName="name" placeholder="Nome">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput formControlName="taxId" placeholder="Tax ID">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="mcc" placeholder="MCC">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+            <mat-option *ngFor="let s of status" [value]="s.name">{{ s.description }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Tipo de Prospect</mat-label>
+        <mat-select formControlName="naturalPerson">
+            <mat-option value="true">Pessoa Física</mat-option>
+            <mat-option value="false">Pessoa Jurídica</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="initialDate" placeholder="Data Inicial">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="finalDate" placeholder="Data Final">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="actions big-item">
+        <button appButton="primary" ghost="true" type="button" (click)="onClear.emit()">Limpar</button>
+        <button appButton="primary" type="button" (click)="onApply.emit()" mat-raised-button color="warn">Pesquisar</button>
+    </div>
+</form>

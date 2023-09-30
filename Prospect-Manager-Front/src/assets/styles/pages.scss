@@ -1,0 +1,40 @@
+.app-container {
+    max-width: 720px;
+    margin: 0 auto;
+    @media screen and (max-width: 900px) {
+        max-width: 600px;
+    }
+    @media screen and (max-width: 720px) {
+        max-width: 420px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    @media screen and (max-width: 500px) {
+        grid-template-columns: 1fr;
+    }
+    > .big-item {
+        grid-column: span 1/-1;
+    }
+    .md-item {
+        grid-column: span 2;
+    }
+    .small-item {
+        grid-column: span 1;
+    }
+}
+
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    .right {
+        justify-content: flex-end;
+    }
+}

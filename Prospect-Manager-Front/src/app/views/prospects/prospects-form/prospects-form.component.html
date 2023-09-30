@@ -1,0 +1,19 @@
+<div class="app-container">
+    <h4>Prospect</h4>
+    <form *ngIf="prospectForm" [formGroup]="prospectForm">
+        <mat-form-field>
+            <mat-label>Tipo de Prospect</mat-label>
+            <mat-radio-group formControlName="naturalPerson" (change)="onNaturalPersonChange()">
+                <mat-radio-button value="true">Pessoa Física</mat-radio-button>
+                <mat-radio-button value="false">Pessoa Jurídica</mat-radio-button>
+            </mat-radio-group>
+        </mat-form-field>
+        <person-form *ngIf="isNaturalPerson" [personForm]="personFormGroup"></person-form>
+        <company-form *ngIf="!isNaturalPerson" [companyForm]="companyFormGroup"></company-form>
+        <div class="actions">
+            <button appButton="primary" type="button" [ghost]="true" (click)="toList()">VOLTAR</button>
+            <button appButton="primary" type="button" (click)="onSubmit()">SALVAR</button>
+            <button *ngIf="prospectFormValues.id" type="button" (click)="onDelete()" appButton="tertiary" [ghost]="true">EXCLUIR</button>
+        </div>
+    </form>
+</div>
