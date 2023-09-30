@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { EnumDto } from 'src/app/core/models/enum.model';
 import { Prospect } from 'src/app/core/models/prospect.model';
+import { QueueItem } from 'src/app/core/models/queue-item.model';
 import { Queue } from 'src/app/core/models/queue.model';
 import { AppService } from 'src/app/core/services/app.service';
 import { ProspectService } from 'src/app/core/services/prospect.service';
@@ -15,7 +16,11 @@ import { QueueService } from 'src/app/core/services/queue.service';
 })
 export class QueueViewComponent implements OnInit {
 
-  public queue: Queue;
+  public readonly displayedColumns: string[] = ['name', 'createdAt', 'updatedAt'];
+
+  public current: Prospect;
+  public size: number;
+  public items: QueueItem[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -34,8 +39,10 @@ export class QueueViewComponent implements OnInit {
     return this.queue?.queueItems?.length ?? 0;
   }
 
-  public get current(): Prospect {
-    return this.queue.first;
+  public set queue(queue: Queue) {
+    this.current = queue?.first ?? null;
+    this.size = queue?.size ?? 0;
+    this.items = queue?.queueItems ?? [];
   }
 
   public onAnalyze(status: string): void {

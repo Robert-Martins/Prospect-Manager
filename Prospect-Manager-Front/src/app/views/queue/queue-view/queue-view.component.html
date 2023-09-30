@@ -1,1 +1,26 @@
-<p>queue-view works!</p>
+<section class="app-container">
+    <span *ngIf="size === 0">
+        Fila vazia
+    </span>
+    <ng-container *ngIf="size > 0">
+        <prospect-analysis-card [prospect]="current"></prospect-analysis-card>
+        <table mat-table [dataSource]="items">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element.name | namecase}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="taxId">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.createdAt | dateformat}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="mcc">
+              <th mat-header-cell *matHeaderCellDef> MCC </th>
+              <td mat-cell *matCellDef="let element"> {{element.updatedAt | dateformat}} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        </table>
+    </ng-container>
+</section>
