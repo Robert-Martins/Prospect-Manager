@@ -1,7 +1,7 @@
 <app-header (changeSidebarState)="changeSidebarState()"></app-header>
 <mat-sidenav-container>
     <mat-sidenav [(opened)]="isSidebarOpen" >
-        <app-sidebar></app-sidebar>
+        <app-sidebar (changeSidebarState)="changeSidebarState()"></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content>
         <router-outlet></router-outlet>
