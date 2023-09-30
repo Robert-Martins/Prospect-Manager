@@ -6,6 +6,9 @@ import { TableModule } from './table/table.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DialogsModule } from './dialogs/dialogs.module';
 import { RouterModule } from '@angular/router';
+import { CardsModule } from './cards/cards.module';
+import { FormsModule } from './forms/forms.module';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 
@@ -19,14 +22,19 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     TableModule,
     DialogsModule,
-    RouterModule
+    CardsModule,
+    FormsModule,
+    RouterModule,
+    DirectivesModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    TableModule,
     SidebarComponent,
-    DialogsModule
+    DialogsModule,
+    TableModule,
+    CardsModule,
+    FormsModule
   ]
 })
 export class ComponentsModule { }
