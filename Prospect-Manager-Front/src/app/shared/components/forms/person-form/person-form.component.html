@@ -1,0 +1,30 @@
+<form *ngIf="personForm" [formGroup]="personForm" class="grid">
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Nome" formControlName="name">
+        <mat-error *ngIf="personForm?.get('name')?.hasError('required')">Nome é obrigatório</mat-error>
+        <mat-error *ngIf="personForm?.get('name')?.hasError('maxlength')">Nome deve ter no máximo 50 caracteres</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>CPF</mat-label>
+        <input matInput placeholder="CPF" formControlName="cpf">
+        <mat-error *ngIf="personForm?.get('cpf')?.hasError('required')">CPF é obrigatório</mat-error>
+        <mat-error *ngIf="personForm?.get('cpf')?.hasError('minlength')">CPF deve ter 11 dígitos</mat-error>
+        <mat-error *ngIf="personForm?.get('cpf')?.hasError('maxlength')">CPF deve ter 11 dígitos</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="personForm?.get('email')?.hasError('required')">Email é obrigatório</mat-error>
+        <mat-error *ngIf="personForm?.get('email')?.hasError('pattern')">Email inválido</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>MCC</mat-label>
+        <input matInput placeholder="MCC" formControlName="mcc">
+        <mat-error *ngIf="personForm?.get('mcc')?.hasError('required')">MCC é obrigatório</mat-error>
+        <mat-error *ngIf="personForm?.get('mcc')?.hasError('max')">MCC deve ser no máximo 9999</mat-error>
+    </mat-form-field>
+</form>
