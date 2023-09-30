@@ -1,0 +1,45 @@
+<form *ngIf="companyForm" [formGroup]="companyForm" class="grid">
+    <mat-form-field>
+        <mat-label>Nome da Empresa</mat-label>
+        <input matInput formControlName="companyName">
+        <mat-error *ngIf="companyForm?.get('companyName')?.hasError('required')">Nome da empresa é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('companyName')?.hasError('maxlength')">Nome da empresa deve ter no máximo 50 caracteres</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CNPJ</mat-label>
+        <input matInput formControlName="cnpj">
+        <mat-error *ngIf="companyForm?.get('cnpj')?.hasError('required')">CNPJ é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('cnpj')?.hasError('minlength')">CNPJ deve ter 14 dígitos</mat-error>
+        <mat-error *ngIf="companyForm?.get('cnpj')?.hasError('maxlength')">CNPJ deve ter 14 dígitos</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>MCC</mat-label>
+        <input matInput formControlName="mcc">
+        <mat-error *ngIf="companyForm?.get('mcc')?.hasError('required')">MCC é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('mcc')?.hasError('max')">MCC deve ser no máximo 4</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nome do Contato</mat-label>
+        <input matInput formControlName="contact.name">
+        <mat-error *ngIf="companyForm?.get('contact.name')?.hasError('required')">Nome do contato é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('contact.name')?.hasError('maxlength')">Nome do contato deve ter no máximo 50 caracteres</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CPF do Contato</mat-label>
+        <input matInput formControlName="contact.cpf">
+        <mat-error *ngIf="companyForm?.get('contact.cpf')?.hasError('required')">CPF do contato é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('contact.cpf')?.hasError('minlength')">CPF deve ter 11 dígitos</mat-error>
+        <mat-error *ngIf="companyForm?.get('contact.cpf')?.hasError('maxlength')">CPF deve ter 11 dígitos</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email do Contato</mat-label>
+        <input matInput formControlName="contact.email">
+        <mat-error *ngIf="companyForm?.get('contact.email')?.hasError('required')">Email do contato é obrigatório</mat-error>
+        <mat-error *ngIf="companyForm?.get('ccontact.email')?.hasError('pattern')">Email do contato inválido</mat-error>
+      </mat-form-field>
+</form>
