@@ -1,0 +1,61 @@
+button.app-button {
+    min-width: 120px;
+    padding: 8px 20px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: none;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    &.primary {
+        background-color: #00A9E0;
+        border: 1px solid #00A9E0;
+        &:hover {
+            color: #00A9E0;
+        }
+        &.ghost {
+            color: #00A9E0;
+            &:hover {
+                background-color: #00A9E0;
+            }
+        }
+    }
+    &.secondary {
+        background-color: #00c389;
+        border: 1px solid #00c389;
+        &:hover {
+            color: #00c389;
+        }
+        &.ghost {
+            color: #00c389;
+            &:hover {
+                background-color: #00c389;
+            }
+        }
+    }
+    &.tertiary {
+        background-color: rgb(229, 35, 61);
+        border: 1px solid rgb(229, 35, 61);
+        &:hover {
+            color: rgb(229, 35, 61);
+        }
+        &.ghost {
+            color: rgb(229, 35, 61);
+            &:hover {
+                background-color: rgb(229, 35, 61);
+            }
+        }
+    }
+    &:hover {
+        background-color: white;
+    }
+    &.ghost {
+        background-color: white;
+        &:hover {
+            color: white;
+        }
+    }
+}
