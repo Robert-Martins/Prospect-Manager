@@ -37,14 +37,14 @@ export class ProspectService {
     finalDate: Date
   ): Observable<Prospect[]> {
     return this.http.get<Prospect[]>(
-      this.apiUrl +
-      `?name=${name}` +
-      `&taxId=${taxId}` +
-      `&mcc=${mcc}` +
-      `&status=${status}` +
-      `&naturalPerson=${naturalPerson}` +
-      `&initialDate=${initialDate}` +
-      `&finalDate=${finalDate}`
+      `${this.apiUrl}/all` +
+      `?name=${name ?? ''}` +
+      `&taxId=${taxId ?? ''}` +
+      `&mcc=${mcc ?? ''}` +
+      `&status=${status ?? ''}` +
+      `&naturalPerson=${naturalPerson ?? ''}` +
+      `${initialDate ? `&initialDate=${initialDate}` : ''}` +
+      `${finalDate? `&finalDate=${finalDate}` : ''}`
     );
   }
 

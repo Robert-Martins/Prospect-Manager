@@ -13,7 +13,7 @@ export class AppService {
   constructor(
     private http: HttpClient
   ) { 
-    this.apiUrl = this.apiUrl.concat("/app");
+    this.apiUrl = this.apiUrl.concat("/app/enum");
   }
 
   public loadEnum(type: string): Observable<EnumDto[]> {
