@@ -1,0 +1,20 @@
+<section>
+    <div class="infos">
+        <div>
+            <p>Nome: </p>
+            <span>{{ prospectName ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <p>{{ isNaturalPerson ? 'CPF: ' : 'CNPJ: ' }}</p>
+            <span>{{ prospectTaxId ?? 'Não informado' }}</span>
+        </div>
+        <div>
+            <p>MCC: </p>
+            <span>{{ prospectMcc ?? 'Não informado' }}</span>
+        </div>
+    </div>
+    <div class="actions">
+        <button appButton="tertiary" (click)="onRepprove()">REPROVAR</button>
+        <button appButton="secondary" (click)="onApprove()">APROVAR</button>
+    </div>
+</section>
